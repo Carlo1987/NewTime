@@ -1,0 +1,111 @@
+
+
+
+  /*/////////////////////     NAVBAR    /////////////////////////*/
+
+
+@use 'colors';
+@use 'mixins&extends' as *;
+
+$color_celeste : colors.$color_celeste;
+$color_dark : colors.$color_dark;
+$color_dark_light : colors.$color_dark_light;
+$color_danger : colors.$color_danger;
+$transition : colors.$transition;
+
+
+
+.navbar{                                          
+    background-color: $color_celeste;
+
+    a{ color: $color_dark; }
+
+    .navbar-brand{ transition: $transition; }
+
+    .navbar-brand:hover{ @include translateX(15px); }
+
+
+    .dropdown{
+        @include translateX(15px);
+        transition: $transition;
+
+        .dropdown-toggle{
+            font-size: 1.5rem;
+        }
+
+
+        .dropdown-menu{
+            margin-left: -30px;
+
+            li{
+                text-align: center;
+      
+                a{
+                    display: inline-block;
+                    width: auto;
+                    font-size: 1.1rem;
+                    cursor: pointer;
+                }
+
+                a:hover{
+                    background-color: white;
+                }
+
+                a:visited{
+                    color: $color_dark;
+                } 
+            }
+          
+        
+        }
+    } 
+
+    .dropdown:hover{
+        @include translateX(0px);
+    }
+   
+}
+
+
+
+
+
+
+@media(max-width:575px){
+
+    .navbar{
+        
+        .nav-item{
+            width: 100%;
+            text-align: center;
+
+            .nav-link{
+                display: inline-block;
+                width: auto;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+      
+
+        .dropdown{
+            @include translateX(0px);
+            .dropdown-menu{
+                margin-left: 0px;
+                background-color: $color_celeste;
+                border: transparent;
+    
+                .dropdown-divider{ display: none; }
+    
+                li{
+                    a:hover{
+                        background-color: $color_celeste;
+                    }
+                }
+            }
+        }
+    }
+
+} 
+

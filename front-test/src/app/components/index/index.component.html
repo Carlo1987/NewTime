@@ -1,0 +1,65 @@
+
+
+<section>
+
+
+    <div class="user_index" *ngIf="user != null  then auth  else no_auth">  </div>
+
+    <ng-template #no_auth>
+
+        <h2> Nessun Utente loggato </h2>
+
+        <p> Loggati con uno dei seguenti Utenti: </p>
+
+            <app-loading [loading]="loading"></app-loading>
+
+            <div class="table_container">
+
+                <table>
+
+                    <tr>
+                        <th> Nome </th>
+                        <th> Cognome </th>
+                        <th> Email </th>
+                        <th> Password </th>
+                    </tr>
+
+                    <tr *ngFor="let user of users">
+                        <td> {{ user.name }} </td>
+                        <td> {{ user.surname }} </td>
+                        <td> {{ user.email }} </td>
+                       
+                        <td  *ngIf="user.status == 'default'"> 12345678  </td>
+                        <td  *ngIf="user.status == 'new_user'"> **********  </td>
+                    </tr>
+
+                </table>
+
+            </div>
+       
+        <p> <strong> <a class="link_hover p-2" routerLink="register"> Oppure registrati e creane di nuovi! </a> </strong> </p>
+
+    </ng-template>
+
+
+
+
+    <ng-template #auth>
+
+        <h2> Utente loggato </h2>
+
+        <div class="alert">
+            <ul class="user_list">
+                <li> <strong> Nome: </strong> {{ user.name }} </li>
+                <li> <strong> Cognome: </strong> {{ user.surname }} </li>
+                <li> <strong> Email: </strong> {{ user.email }} </li>
+            </ul>
+        </div>
+   
+    </ng-template>
+
+
+
+    
+
+</section>

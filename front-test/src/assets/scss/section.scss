@@ -1,0 +1,108 @@
+
+
+  /*/////////////////////      STILE GENERALE SEZIONE    /////////////////////////*/
+
+
+@use 'colors';
+@use 'mixins&extends' as *;
+
+$color_celeste : colors.$color_celeste;
+$color_dark : colors.$color_dark;
+$color_dark_light : colors.$color_dark_light;
+$color_danger : colors.$color_danger;
+$transition : colors.$transition;
+
+
+
+section{                               
+    width: 100%;
+    background-color: $color_celeste;
+    margin-top: 3rem;
+    padding: 1rem;
+
+
+    h2{
+        text-align: center;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    
+    p{
+        text-align: center;
+        font-size: 1.2rem;
+    }
+
+
+    form{
+        width: 100%;
+        color: $color_dark;
+        margin-top: 3rem;
+
+
+        label,
+        input:not(button){ 
+            width: 100%; 
+        }
+
+    }
+
+
+    .user_list{
+        @extend %list_style;
+        font-size: 1.4rem;
+    }
+
+
+    .table_container{
+        width: 100%;
+        overflow-x: auto;
+
+        table{
+            width: 100%;
+            border: 1px solid $color_dark;
+         
+    
+            th , td{
+                border: 1px solid $color_dark;
+                text-align: center;
+            }
+        }
+    
+    }
+
+
+
+    button{
+        display: block;
+        margin: 0 auto;
+        margin-top: 3rem;
+        padding: 0.5rem;
+        background-color: $color_dark;
+        color: $color_celeste;
+        transition: $transition;
+    }
+
+    button:hover{
+        background-color: $color_dark_light;
+    }
+
+
+}
+
+
+
+
+@media(max-width:450px){
+
+    section{
+        .user_list{ font-size: 1.1rem; }
+    }
+   
+}
+
+
+
+
+
+

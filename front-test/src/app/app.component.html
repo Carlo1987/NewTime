@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-sm" >
+
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">Test-NewTime</a>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNewTime" aria-controls="navbarNewTime" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse pe-0" id="navbarNewTime">
+
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" *ngIf="user == null">
+          <a class="nav-link link_hover fs-5" routerLink="login">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="user == null">
+          <a class="nav-link link_hover fs-5" routerLink="register">Registrazione</a>
+        </li>
+
+
+        <li class="nav-item dropdown me-5"  *ngIf="user != null">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           {{ user_name }}
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item link_hover" routerLink="edit">Aggiorna</a></li>
+            <li><a class="dropdown-item link_hover" routerLink="delete">Cancella</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item link_hover" (click)="logout()">Logout</a></li>
+          </ul>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+
+</nav>
+
+
+
+
+<div class="container-lg">
+
+  <router-outlet></router-outlet>
+
+</div>

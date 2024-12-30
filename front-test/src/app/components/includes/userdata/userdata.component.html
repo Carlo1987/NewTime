@@ -1,0 +1,69 @@
+<section>
+
+    <h2>  {{ text.title }} </h2>
+
+
+    <form #userForm="ngForm" (ngSubmit)="send_data(userForm)">
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <label for="name"> Nome: </label>
+                <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" required>
+
+                <div class="invalid-input" *ngIf="name.touched && name.invalid"> {{ emptyInput }} </div>
+            </div>
+
+            <div class="col-md-4">
+                <label for="surname"> Cognome: </label>
+                <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" required>
+
+                <div class="invalid-input" *ngIf="surname.touched && surname.invalid"> {{ emptyInput }} </div>
+            </div>
+
+            <div class="col-md-4">
+                <label for="email"> Email: </label>
+                <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" required>
+
+                <div class="invalid-input" *ngIf="email.touched && email.invalid"> {{ emptyInput }} </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="password"> Password: </label>
+                <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" required>
+
+                <div class="invalid-input" *ngIf="password.touched && password.invalid"> {{ emptyInput }} </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="password_confirmation"> Conferma password: </label>
+                <input type="password" name="password_confirmation" #password_confirmation="ngModel" [(ngModel)]="user.password_confirmation" required>
+
+                <div class="invalid-input" *ngIf="password_confirmation.touched && password_confirmation.invalid"> {{ emptyInput }} </div>
+            </div>
+
+        </div>
+
+
+        <div class="alert alert-danger" role="alert" *ngIf="errors_list.length > 0">
+            <p> Sono stati riscontrati i seguenti errori: </p>
+            <ul>
+                <li *ngFor="let error of errors_list"> {{ error }} </li>
+            </ul>
+        </div>
+
+        <div class="alert alert-danger" *ngIf="edit_denied != ''"> {{ edit_denied }} </div>
+
+        <div class="alert alert-success" role="alert" *ngIf="success != ''"> {{ success }} </div>
+
+
+        <app-loading [loading]="loading"></app-loading>
+
+
+        <button> {{ text.button }} </button>
+
+    </form>
+
+</section>
+
+

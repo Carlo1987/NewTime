@@ -1,0 +1,82 @@
+
+
+  /*/////////////////////     FOGLIO STILE PRINCIPALE    /////////////////////////*/
+
+
+
+  @use 'colors';
+  @use 'mixins&extends' as *;
+  @use 'navbar';
+  @use 'section';
+  
+  
+  
+  $color_celeste : colors.$color_celeste;
+  $color_dark : colors.$color_dark;
+  $color_dark_light : colors.$color_dark_light;
+  $color_danger : colors.$color_danger;
+  $transition : colors.$transition;
+  
+  
+  
+  body { font-size: 10px; }
+  
+  
+  
+    /*/////////////////////      CLASSI GENERALI    /////////////////////////*/
+  
+  .loading{
+      text-align: center;
+      font-size: 1.5rem;
+      margin-top: 1rem;
+  }
+  
+  
+  .invalid-input{
+      width: 100%;
+      color: $color_danger;
+      text-align: center;
+  }
+  
+  
+  
+  .alert{
+      text-align: center;
+      margin-top: 3rem;
+  
+      ul{ @extend %list_style; }
+  }
+  
+  
+  
+  .link_hover{ 
+      position: relative;
+      color: $color_dark; 
+      text-decoration: none;
+  }
+  
+  
+  .link_hover::after{
+      content: '';
+      background-color: $color_dark;
+      height: 2px;
+      position: absolute;
+      bottom : 5px;
+      width: 0%;
+      left: 50%;
+      transition: $transition;
+  }
+  
+  
+  .link_hover:hover::after{
+      width: 100%;
+      left: 0%;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
