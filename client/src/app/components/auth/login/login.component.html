@@ -1,0 +1,55 @@
+
+
+<section>
+
+    <h2>  Login </h2>
+
+
+    <form (ngSubmit)="login()">
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <label for="email"> Email: </label>
+                <input type="email" name="email" #email="ngModel" [(ngModel)]="data.email" required>
+
+                <div class="invalid-input" *ngIf="email.touched && email.invalid"> {{ emptyInput }} </div>
+            </div>
+
+
+            <div class="col-sm-6">
+                <label for="password"> Password: </label>
+                <input type="password" name="password" #password="ngModel" [(ngModel)]="data.password" required>
+
+                <div class="invalid-input" *ngIf="password.touched && password.invalid"> {{ emptyInput }} </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="alert alert-danger" role="alert" *ngIf="errors_list.length > 0">
+            <p> Sono stati riscontrati i seguenti errori: </p>
+            <ul>
+                <li *ngFor="let error of errors_list"> {{ error }} </li>
+            </ul>
+        </div>
+
+
+        <div class="alert alert-danger" role="alert" *ngIf="access_denied != ''"> {{ access_denied }} </div>
+
+
+        <div class="alert alert-success" role="alert" *ngIf="success != ''"> {{ success }} </div>
+
+
+        <app-loading [loading]="loading"></app-loading>
+
+
+        <button> Login </button>
+
+    </form>
+
+</section>
+
+
+

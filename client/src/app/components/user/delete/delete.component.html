@@ -1,0 +1,17 @@
+
+
+<section>
+
+    <h2> Cancella Utente </h2>
+
+    <p> Per cancellare questo utente cliccare nel bottone sotto </p>
+
+    <button (click)="delete()"> Cancella Utente </button>
+
+    <app-loading [loading]="loading"></app-loading>
+
+    <div class="alert alert-danger" role="alert" *ngIf="error != ''"> {{ error }} </div>
+
+</section>
+
+

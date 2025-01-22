@@ -1,0 +1,3 @@
+docker-compose.prod.yml
+api/dockerfile.prod
+client/dockerfile.prod

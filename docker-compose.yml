@@ -1,0 +1,62 @@
+services:
+  angular: 
+    build: 
+      context: ./client
+      dockerfile: dockerfile
+    container_name: newtime-client
+    ports:
+      - 4200:4200
+    volumes:
+      - ./client/src:/app/src
+
+  laravel:
+    build: 
+      context: ./api
+      dockerfile: dockerfile
+    container_name: newtime-api
+    ports:
+      - 8080:80
+    volumes:
+      - ./api:/var/www/html
+      - /var/www/html/vendor
+      - ./api/storage:/var/www/html/storage
+    depends_on:
+      - mysql
+    command: >
+      sh -c "
+       until nc -z -v -w30 mysql 3306; do
+        echo 'Waiting for MySQL...';
+        sleep 5;
+      done;
+      echo 'MySQL is up - executing command';
+      echo 'APP_ENV=local' > /var/www/html/.env &&
+      echo 'APP_DEBUG=true' >> /var/www/html/.env &&
+      echo 'APP_KEY=base64:t9PNio71+8+ktZdTGN7bx2dMENC9/3uvUGPdg60MdmA=' >> /var/www/html/.env &&
+      echo 'ALLOWED_ORIGIN=http://localhost:4200' >> /var/www/html/.env &&
+      echo 'DB_CONNECTION=mysql' >> /var/www/html/.env &&
+      echo 'DB_HOST=mysql' >> /var/www/html/.env &&
+      echo 'DB_PORT=3306' >> /var/www/html/.env &&
+      echo 'DB_DATABASE=test' >> /var/www/html/.env &&
+      echo 'DB_USERNAME=user_test' >> /var/www/html/.env &&
+      echo 'DB_PASSWORD=test' >> /var/www/html/.env &&
+      php artisan migrate --force &&
+      php artisan db:seed --class=UsersTableSeeder &&
+      apache2-foreground
+      "
+
+  mysql:
+    image: mysql:8.0
+    container_name: newtime-mysql
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - test:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: test
+      MYSQL_USER: user_test
+      MYSQL_PASSWORD: test
+
+volumes:
+  test:
