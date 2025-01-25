@@ -32,7 +32,7 @@ Verrà clonata la cartella NewTime contenente l'applicazione, ovvero:
     cd NewTime
 
 
-3 - Avendo Docker avviato, creare immagini e container docker e avviarli con il comando:
+3 - Avendo Docker avviato, digitare il comando sotto per creare immagini e container docker e avviarli:
 
     docker compose up -d
 

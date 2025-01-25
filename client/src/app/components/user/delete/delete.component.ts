@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
-import { Global } from 'src/app/services/global';
+import { IdentityService } from 'src/app/services/identity/identity.service';
 
 @Component({
   selector: 'app-delete',
@@ -13,6 +13,7 @@ export class DeleteComponent {
   public error:string = '';
 
   constructor(
+    private _identityService : IdentityService,
     private _userService : UserService
   ){}
 
@@ -24,7 +25,7 @@ export class DeleteComponent {
 
       next : () => {
         this.loading = false;
-        Global.remove_token();
+        this._identityService.deleteIdentity();
       },
 
       error : (error) => {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { IdentityService } from 'src/app/services/identity/identity.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,7 +20,8 @@ export class LoginComponent {
 
   constructor(
     private _router : Router,
-    private  _authService : AuthService
+    private  _authService : AuthService,
+    private _identityService : IdentityService
    ){}
 
 
@@ -38,7 +40,8 @@ export class LoginComponent {
         this.loading = false;
         sessionStorage.setItem('token' , response.token);
         sessionStorage.setItem('user' , JSON.stringify(response.user));
-        window.location.reload();
+        this._identityService.setIdentity(response.user);
+        this._router.navigate(['']);
       },
 
       error : (error) => {

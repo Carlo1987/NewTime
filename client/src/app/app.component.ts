@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { IdentityService } from './services/identity/identity.service';
 import { AuthService } from './services/auth/auth.service';
 import { Global } from './services/global';
@@ -16,6 +17,7 @@ export class AppComponent {
 
 
   constructor(
+    private _router : Router,
     private _identityService : IdentityService,
     private _authService : AuthService
   ){
@@ -43,7 +45,7 @@ export class AppComponent {
   logout(){
     this._authService.logout().subscribe(response=>{
       if(response){
-        Global.remove_token();
+        this._identityService.deleteIdentity();
       }
     })
   }

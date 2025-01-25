@@ -15,11 +15,21 @@ services:
       dockerfile: dockerfile
     container_name: newtime-api
     ports:
-      - 8080:80
+      - 8000:8000
     volumes:
       - ./api:/var/www/html
-      - /var/www/html/vendor
+      - ./api/vendor:/var/www/html/vendor
       - ./api/storage:/var/www/html/storage
+    environment:
+      APP_ENV: local
+      APP_DEBUG: true
+      ALLOWED_ORIGIN: http://localhost:4200
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: test
+      DB_USERNAME: user_test
+      DB_PASSWORD: test
     depends_on:
       - mysql
     command: >
@@ -29,19 +39,11 @@ services:
         sleep 5;
       done;
       echo 'MySQL is up - executing command';
-      echo 'APP_ENV=local' > /var/www/html/.env &&
-      echo 'APP_DEBUG=true' >> /var/www/html/.env &&
-      echo 'APP_KEY=base64:t9PNio71+8+ktZdTGN7bx2dMENC9/3uvUGPdg60MdmA=' >> /var/www/html/.env &&
-      echo 'ALLOWED_ORIGIN=http://localhost:4200' >> /var/www/html/.env &&
-      echo 'DB_CONNECTION=mysql' >> /var/www/html/.env &&
-      echo 'DB_HOST=mysql' >> /var/www/html/.env &&
-      echo 'DB_PORT=3306' >> /var/www/html/.env &&
-      echo 'DB_DATABASE=test' >> /var/www/html/.env &&
-      echo 'DB_USERNAME=user_test' >> /var/www/html/.env &&
-      echo 'DB_PASSWORD=test' >> /var/www/html/.env &&
+
+      php artisan key:generate &&
       php artisan migrate --force &&
-      php artisan db:seed --class=UsersTableSeeder &&
-      apache2-foreground
+      php artisan db:seed --force --class=UsersTableSeeder &&
+      php artisan serve --host=0.0.0.0 --port=8000
       "
 
   mysql:
